@@ -1,0 +1,19 @@
+* How can I configure squid to cache HTTPS?
+
+In line 654 it takes 76 seconds to get from rubygems. I'm not able to
+cache that content. How can I configure squid to cache HTTPS?
+
+#+BEGIN_SRC 
+[demo@demos-MacBook-Pro:~/pdev/TaylorMonacelli/squid_proxy(tm/wip)]$ cat -n /opt/boxen/homebrew/var/logs/access.log | tail
+   645	1474675043.669    658 127.0.0.1 TCP_HIT/200 90248146 GET http://packages.chef.io/files/stable/chef/12.14.77/windows/2012r2/chef-client-12.14.77-1-x86.msi - HIER_NONE/- application/octet-stream
+   646	1474675126.560    376 127.0.0.1 TCP_MISS/302 459 GET http://www.7-zip.org/a/7z1514.msi - HIER_DIRECT/178.62.49.34 text/html
+   647	1474675126.601     30 127.0.0.1 TCP_HIT/200 1270639 GET http://d.7-zip.org/a/7z1514.msi - HIER_NONE/- application/octet-stream
+   648	1474675132.005   2051 127.0.0.1 TCP_TUNNEL/200 17017 CONNECT api.rubygems.org:443 - HIER_DIRECT/54.186.104.15 -
+   649	1474675132.006   1709 127.0.0.1 TCP_TUNNEL/200 871347 CONNECT rubygems.global.ssl.fastly.net:443 - HIER_DIRECT/151.101.52.249 -
+   650	1474675132.189    150 127.0.0.1 TCP_HIT/200 6554975 GET http://download.microsoft.com/download/1/6/B/16B06F60-3B20-4FF2-B699-5E9B7962F9AE/VSU_4/vcredist_x86.exe - HIER_NONE/- application/octet-stream
+   651	1474675193.580  65707 127.0.0.1 TCP_TUNNEL/200 17068 CONNECT api.rubygems.org:443 - HIER_DIRECT/54.186.104.15 -
+   652	1474675203.664    313 127.0.0.1 TCP_HIT/200 21273778 GET http://installer-bin.streambox.com/php-5.6.10-Win32-VC11-x86.zip - HIER_NONE/- application/zip
+   653	1474675204.639      0 127.0.0.1 TCP_IMS_HIT/304 266 GET http://installer-bin.streambox.com/php-5.6.10-Win32-VC11-x86.zip - HIER_NONE/- application/zip
+   654	1474675205.173  76877 127.0.0.1 TCP_TUNNEL/200 7486 CONNECT rubygems.global.ssl.fastly.net:443 - HIER_DIRECT/151.101.52.249 -
+[demo@demos-MacBook-Pro:~/pdev/TaylorMonacelli/squid_proxy(tm/wip)]$ 
+#+END_SRC
