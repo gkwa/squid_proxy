@@ -24,10 +24,12 @@ tmux select-pane -t $SESSION:0.3
 tmux split-window -t $SESSION:0.3 -h
 
 tmux send-keys -t $SESSION:0.3 "lsof -Pi tcp:3128" C-m
-tmux send-keys -t $SESSION:0.3 "#curl -L --proxy 127.0.0.1:3128 -O http://installer-bin.streambox.com/httpd-2.4.23-win32-VC14.zip" C-m
-tmux send-keys -t $SESSION:0.3 "#curl -L --proxy 127.0.0.1:3128 -O http://packages.chef.io/files/stable/chef/12.15.19/windows/2012r2/chef-client-12.15.19-1-x86.msi"  C-m
+tmux send-keys -t $SESSION:0.3 "curl -L --proxy 127.0.0.1:3128 -O http://installer-bin.streambox.com/httpd-2.4.23-win32-VC14.zip" C-m
 tmux select-pane -t $SESSION:0.3
 
-tmux send-keys -t $SESSION:0.4 "cd /opt/boxen/homebrew/etc" C-m
-tmux send-keys -t $SESSION:0.4 "vim squid.conf" C-m
+tmux select-pane -t $SESSION:0.3
+tmux split-window -t $SESSION:0.3 -v
+tmux send-keys -t $SESSION:0.4 "curl -L --proxy 127.0.0.1:3128 -O http://packages.chef.io/files/stable/chef/12.15.19/windows/2012r2/chef-client-12.15.19-1-x86.msi"  C-m
 
+tmux send-keys -t $SESSION:0.5 "cd /opt/boxen/homebrew/etc" C-m
+tmux send-keys -t $SESSION:0.5 "vim squid.conf" C-m
