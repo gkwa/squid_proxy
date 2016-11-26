@@ -4,7 +4,7 @@ SESSION=squid
 tmux kill-session -t $SESSION
 tmux new-session -d -s $SESSION
 tmux send-keys -t $SESSION:0.0 "net stop squid" C-m
-tmux send-keys -t $SESSION:0.0 "kill -9 squid" C-m
+tmux send-keys -t $SESSION:0.0 "kill -9 $(pidof squid)" C-m
 tmux send-keys -t $SESSION:0.0 "tail -f /var/log/squid/access.log" C-m
 
 tmux split-window -t $SESSION:0.0 -v
