@@ -1,3 +1,15 @@
+* test flow on cygwin
+
+# start clean
+net stop squid
+rm -rf /e/squidcachedir/cache
+mkdir -p /e/squidcachedir/cache
+/c/cygwin/usr/sbin/squid -z #create swap space
+
+# iterate on this while editting /etc/squid/squid.conf
+tmux kill-session -t squid
+sh -x tmux-test-squid-cygwin.sh; tmux attach -t squid
+
 * How can I configure squid to cache HTTPS?
 
 In line 654 it takes 76 seconds to get from rubygems. I'm not able to
