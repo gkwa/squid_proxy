@@ -10,7 +10,7 @@ tmux send-keys -t $SESSION:0.0 "tail -f /opt/boxen/homebrew/var/logs/access.log"
 tmux split-window -t $SESSION:0.0 -v
 tmux resize-pane -t $SESSION:0.0 -U 15
 
-tmux send-keys -t $SESSION:0.1 "while :; do d1=$(date); d2=$(du -sh /e/squidcachedir); echo $d1 $d2; sleep 10; done" C-m
+tmux send-keys -t $SESSION:0.1 'while :; do d1="$(date)"; d2=$(du -sh /opt/boxen/homebrew/var/cache/squid); echo $d1 $d2; sleep 10; done' C-m
 tmux split-window -t $SESSION:0.1 -v
 tmux resize-pane -t $SESSION:0.1 -U 10
 
