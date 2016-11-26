@@ -9,6 +9,7 @@ mkdir -p /e/squidcachedir/cache
 # iterate on this while editting /etc/squid/squid.conf
 tmux kill-session -t squid
 sh -x tmux-test-squid-cygwin.sh; tmux attach -t squid
+tmux kill-session -t squid
 
 * How can I configure squid to cache HTTPS?
 
