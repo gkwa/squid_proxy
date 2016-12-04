@@ -1,7 +1,16 @@
 #!/bin/bash
 SESSION=squid
 
-tmux kill-session -t $SESSION
+#
+# If tmux session "squid" already exists, start a new one and connect to
+# it.
+#
+
+if [[ ! -z $(tmux list-sessions | cut -d: -f1 | sed 's,$,:,' |
+			   xargs | grep -i $SESSION) ]]
+then
+	tmux kill-session -t $SESSION
+fi
 tmux new-session -d -s $SESSION
 tmux send-keys -t $SESSION:0.0 "net stop squid" C-m
 tmux send-keys -t $SESSION:0.0 "kill -9 $(pidof squid)" C-m
@@ -32,3 +41,5 @@ tmux send-keys -t $SESSION:0.4 "curl -L --proxy 127.0.0.1:3128 -O http://package
 
 tmux send-keys -t $SESSION:0.5 "cd /etc/squid" C-m
 tmux send-keys -t $SESSION:0.5 "vim squid.conf" C-m
+
+tmux attach -t $SESSION
